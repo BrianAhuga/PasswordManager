@@ -1,0 +1,56 @@
+﻿@model PasswordManager.Models.PasswordEntry
+
+@{
+    ViewData["Title"] = "Create Password Entry";
+}
+
+<div class="container mt-4">
+    <h2>Create New Password</h2>
+
+    @if (TempData["Failed"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Failed !</strong> @TempData["Failed"]
+        </div>
+    }
+
+    @if (TempData["Exists"] != null)
+    {
+        <div class="alert alert-warning">
+            <strong>Failed !</strong> @TempData["Exists"]
+        </div>
+    }
+
+    <!-- Begin form for creating a new password entry -->
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+
+        <div class="form-group">
+            <label for="Site">Site</label>
+            <input asp-for="Site" class="form-control" placeholder="Enter the site name" required />
+            <span asp-validation-for="Site" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="PasswordFor">Password For</label>
+            <input asp-for="PasswordFor" class="form-control" placeholder="Enter the account owner" required />
+            <span asp-validation-for="PasswordFor" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="EmailAddress">Email Address</label>
+            <input asp-for="EmailAddress" type="email" class="form-control" placeholder="Enter the associated email" required />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary">Generate Password and Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <!-- Client-side validation for the form -->
+    <partial name="_ValidationScriptsPartial" />
+}
+
