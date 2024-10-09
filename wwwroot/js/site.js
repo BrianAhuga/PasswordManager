@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
-    // Fade in the alert after 4 seconds
-    $('#fadeAlert').delay(1000).fadeIn(4000);
-});
+﻿window.setTimeout(function () {
+    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+        $(this).remove();
+    });
+}, 4000);

@@ -27,10 +27,11 @@ namespace PasswordManager.Controllers
 
         public async Task<IActionResult> Index(int? page)
         {
-            int pageSize = 15; 
-            int pageNumber = page ?? 1; 
+            int pageSize = 15;
+            int pageNumber = page ?? 1;
 
-            var passwordEntries = await _context.PasswordEntries.ToListAsync();
+            var passwordEntries = await _context.PasswordEntries.OrderByDescending(entry => entry.CreatedDate).ToListAsync();
+
 
             var pagedPasswordEntries = passwordEntries.ToPagedList(pageNumber, pageSize);
 
